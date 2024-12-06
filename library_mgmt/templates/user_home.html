@@ -1,3 +1,110 @@
-<h1>Welcome User!</h1>
-<p>This is your homepage.</p>
-<a href="{% url 'logout' %}">Logout</a>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Home</title>
+    <style>
+        .table-container {
+            margin: 20px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome User!</h1>
+
+    <div class="table-container">
+        <h2>Memberships</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Contact Name</th>
+                    <th>Contact Address</th>
+                    <th>Adhaar Card No</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Membership Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for membership in memberships %}
+                <tr>
+                    <td>{{ membership.first_name }}</td>
+                    <td>{{ membership.last_name }}</td>
+                    <td>{{ membership.contact_name }}</td>
+                    <td>{{ membership.contact_address }}</td>
+                    <td>{{ membership.adhaar_card_no }}</td>
+                    <td>{{ membership.start_date }}</td>
+                    <td>{{ membership.end_date }}</td>
+                    <td>{{ membership.membership_type }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-container">
+        <h2>Books</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date of Procurement</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td>{{ book.name }}</td>
+                    <td>{{ book.date_of_procurement }}</td>
+                    <td>{{ book.quantity }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-container">
+        <h2>Movies</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date of Procurement</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for movie in movies %}
+                <tr>
+                    <td>{{ movie.name }}</td>
+                    <td>{{ movie.date_of_procurement }}</td>
+                    <td>{{ movie.quantity }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <a href="{% url 'logout' %}">Logout</a>
+</body>
+</html>
+
+
+

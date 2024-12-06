@@ -2,6 +2,8 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.shortcuts import render
+from .models import Membership, Media
 from .forms import MembershipForm, UpdateMembershipForm, MediaForm, UpdateMediaForm, UserProfileForm
 
 
@@ -32,7 +34,18 @@ def custom_login_view(request):
 
 
 def user_home(request):
-    return render(request, 'user_home.html')
+    memberships = Membership.objects.all()  # Fetch all memberships
+    books = Media.objects.filter(media_type='book')  # Fetch all books
+    movies = Media.objects.filter(media_type='movie')  # Fetch all movies
+
+    return render(request, 'user_home.html', {
+        'memberships': memberships,
+        'books': books,
+        'movies': movies,
+    })
+
+
+
 
 
 def log_out(request):
@@ -86,3 +99,5 @@ def admin_home(request):
         'update_media_form': UpdateMediaForm(),
         'user_profile_form': UserProfileForm(),
     })
+
+
