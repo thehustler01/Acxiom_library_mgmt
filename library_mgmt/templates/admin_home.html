@@ -1,3 +1,63 @@
 <h1>Welcome Admin!</h1>
-<p>This is your admin homepage.</p>
+
+<div>
+    <button onclick="showForm('add-membership')">Add Membership</button>
+    <button onclick="showForm('update-membership')">Update Membership</button>
+    <button onclick="showForm('add-media')">Add Book/Movie</button>
+    <button onclick="showForm('update-media')">Update Book/Movie</button>
+    <button onclick="showForm('add-update-user')">User Management</button>
+</div>
+
+<div id="forms-container">
+    <div id="add-membership" class="form-container" style="display: none;">
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="add_membership">
+            {{ membership_form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <div id="update-membership" class="form-container" style="display: none;">
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="update_membership">
+            {{ update_membership_form.as_p }}
+            <button type="submit">Update</button>
+        </form>
+    </div>
+    <div id="add-media" class="form-container" style="display: none;">
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="add_media">
+            {{ media_form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <div id="update-media" class="form-container" style="display: none;">
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="update_media">
+            {{ update_media_form.as_p }}
+            <button type="submit">Update</button>
+        </form>
+    </div>
+    <div id="add-update-user" class="form-container" style="display: none;">
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="add_update_user">
+            {{ user_profile_form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function showForm(formId) {
+        document.querySelectorAll('.form-container').forEach(el => el.style.display = 'none');
+        document.getElementById(formId).style.display = 'block';
+    }
+</script>
+
+
+
 <a href="{% url 'logout' %}">Logout</a>
